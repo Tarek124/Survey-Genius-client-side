@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.half-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #706ef7; /* Yellow color */
+  z-index: -1;
+}
+html {
+  scroll-behavior: smooth;
+}
