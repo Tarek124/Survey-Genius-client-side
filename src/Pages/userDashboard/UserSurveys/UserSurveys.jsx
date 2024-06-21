@@ -5,7 +5,7 @@ const UserSurveys = () => {
   const { allSurveys } = useAllSurveys();
 
   return (
-    <div className="p-4">
+    <div className="p-4 bg-purple-200">
       <div className="max-w-7xl mx-auto">
         <div className="grid  md:grid-cols-2 xl:grid-cols-3 gap-4 my-4">
           {allSurveys?.map((item) => (

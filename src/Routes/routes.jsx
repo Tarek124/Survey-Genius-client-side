@@ -12,6 +12,8 @@ import Payment from "../Pages/Payment/Payment";
 import SurveyDetail from "../components/SurveyDetail/SurveyDetail";
 import UserRoutes from "./UserRoutes";
 import UserSurveys from "../Pages/userDashboard/UserSurveys/UserSurveys";
+import MyReports from "../Pages/userDashboard/MyReports/MyReports";
+import Comments from "../Pages/userDashboard/Comments/Comments";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +67,22 @@ const router = createBrowserRouter([
         element: (
           <UserRoutes>
             <UserSurveys />
+          </UserRoutes>
+        ),
+      },
+      {
+        path: "user/my-reports",
+        element: (
+          <UserRoutes>
+            <MyReports />
+          </UserRoutes>
+        ),
+      },
+      {
+        path: "user/comments",
+        element: (
+          <UserRoutes>
+            <Comments />
           </UserRoutes>
         ),
       },

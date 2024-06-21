@@ -23,10 +23,10 @@ const Dashboard = () => {
   };
   return (
     <>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
-          <div className="flex items-center p-4 gap-2 justify-start  lg:hidden">
+          <div className="flex items-center p-4 gap-2 justify-start lg:hidden">
             <label
               htmlFor="my-drawer-2"
               className="drawer-button btn btn-square btn-ghost"
@@ -58,16 +58,27 @@ const Dashboard = () => {
             className="drawer-overlay"
           ></label>
 
-          <ul className="menu font-semibold tracking-wide p-4 w-80 min-h-full bg-base-200 text-base-content">
+          <ul className="menu font-semibold tracking-wide p-4 w-80 min-h-full bg-slate-100 text-base-content">
             <h1 className="text-3xl px-4 py-6 font-semibold font-serif">
               Survey Genius
             </h1>
-            <li>
-              <Link to="/dashboard/user/surveys">User Serveys</Link>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
+            {userRole === "user" ||
+              (userRole === "pro-user" && (
+                <>
+                  <li>
+                    <Link to="/dashboard/user/surveys">User Serveys</Link>
+                  </li>
+                  <li>
+                    <Link to="/dashboard/user/my-reports">My Reports</Link>
+                  </li>
+                  {userRole === "pro-user" && (
+                    <li>
+                      <Link to="user/comments">Comments</Link>
+                    </li>
+                  )}
+                </>
+              ))}
+
             <div className="divider px-4"></div>
             <li className="tracking-wide">
               <Link to="/">Home</Link>

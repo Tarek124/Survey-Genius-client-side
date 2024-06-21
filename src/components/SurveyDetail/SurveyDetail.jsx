@@ -112,6 +112,9 @@ const SurveyDetail = () => {
       .post("/report", {
         surveyId: survey._id,
         reason: reportReason,
+        email: user.email,
+        title: survey.title,
+        description: survey.description,
       })
       .then((res) => {
         console.log(res.data);

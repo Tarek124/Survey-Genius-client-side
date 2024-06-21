@@ -19,7 +19,7 @@ const FeaturedSurveys = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
           {data?.map((item) => (
             <Link key={item._id} to={`/details/${item._id}`}>
-              <div className="card w-96 bg-base-100 shadow-xl">
+              <div className="card md:w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                   <h2 className="card-title">{item.title}</h2>
                   <p>{item.description}</p>

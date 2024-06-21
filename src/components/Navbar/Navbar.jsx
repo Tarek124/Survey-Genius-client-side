@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useSwal from "../../hooks/useSwal";
 import { LuCrown } from "react-icons/lu";
@@ -7,8 +7,9 @@ import { FaCrown } from "react-icons/fa6";
 const Navbar = () => {
   const { user, logout, userRole } = useAuth();
   const { swalSuccess } = useSwal();
+  const navigate = useNavigate();
   const handleLogout = () => {
-    logout().then(() => swalSuccess("logout success"));
+    logout().then(() => navigate("/"), swalSuccess("logout success"));
   };
   const navLink = (
     <>
