@@ -18,7 +18,7 @@ const MyReports = () => {
   return user ? (
     <div className="p-4 bg-emerald-200 h-screen">
       <h1 className="lg:m-4 text-2xl font-bold">Reports</h1>
-      {data.length !== 0 ? (
+      {data?.length !== 0 ? (
         <div className="my-4">
           {data?.map((report) => (
             <div

@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import useSwal from "../../hooks/useSwal";
 import { LuCrown } from "react-icons/lu";
 import { FaCrown } from "react-icons/fa6";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const { user, logout, userRole } = useAuth();
@@ -11,6 +12,11 @@ const Navbar = () => {
   const handleLogout = () => {
     logout().then(() => navigate("/"), swalSuccess("logout success"));
   };
+
+  useEffect(() => {
+    // Use useEffect to force a re-render when user or userRole changes
+  }, [user, userRole]); // Specify dependencies that trigger useEffect
+console.log(user,userRole)
   const navLink = (
     <>
       <li className="tracking-wide">
@@ -19,7 +25,7 @@ const Navbar = () => {
       <li className="tracking-wide">
         <Link to="/surveys">Surveys</Link>
       </li>
-      {user ? (
+      {user && userRole ? (
         <li className="tracking-wide">
           <Link
             to={

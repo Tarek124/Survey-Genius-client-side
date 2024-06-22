@@ -14,6 +14,15 @@ import UserRoutes from "./UserRoutes";
 import UserSurveys from "../Pages/userDashboard/UserSurveys/UserSurveys";
 import MyReports from "../Pages/userDashboard/MyReports/MyReports";
 import Comments from "../Pages/userDashboard/Comments/Comments";
+import AdminRoutes from "./AdminRoutes";
+import AllUsers from "../Pages/AdminDashboard/AllUsers/AllUsers";
+import PaymentAndSurveysResponses from "../Pages/AdminDashboard/PaymentAndSurveysResponses/PaymentAndSurveysResponses";
+import PublishUnpublishSurveys from "../Pages/AdminDashboard/PublishUnpublishSurveys/PublishUnpublishSurveys";
+import CreateSurveys from "../Pages/SurveyorDashboard/CreateSurveys/CreateSurveys";
+import SurveyorRoutes from "./SurveyorRoutes";
+import UpdateSurveys from "../Pages/SurveyorDashboard/UpdateSurveys/UpdateSurveys";
+import UpdateForm from "../Pages/SurveyorDashboard/UpdateSurveys/UpdateForm";
+import SurveyorSurveys from "../Pages/SurveyorDashboard/SurveyorSurveys/SurveyorSurveys";
 
 const router = createBrowserRouter([
   {
@@ -49,7 +58,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <SurveyDetail />,
+        element: (
+          <PrivateRoute>
+            <SurveyDetail />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -84,6 +97,62 @@ const router = createBrowserRouter([
           <UserRoutes>
             <Comments />
           </UserRoutes>
+        ),
+      },
+      {
+        path: "admin/users",
+        element: (
+          <AdminRoutes>
+            <AllUsers />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "admin/surveys",
+        element: (
+          <AdminRoutes>
+            <PublishUnpublishSurveys />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "admin/payments",
+        element: (
+          <AdminRoutes>
+            <PaymentAndSurveysResponses />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "surveyor/create",
+        element: (
+          <SurveyorRoutes>
+            <CreateSurveys />
+          </SurveyorRoutes>
+        ),
+      },
+      {
+        path: "surveyor/update",
+        element: (
+          <SurveyorRoutes>
+            <UpdateSurveys />
+          </SurveyorRoutes>
+        ),
+      },
+      {
+        path: "surveyor/surveys",
+        element: (
+          <SurveyorRoutes>
+            <SurveyorSurveys />
+          </SurveyorRoutes>
+        ),
+      },
+      {
+        path: "surveyor/update/:id",
+        element: (
+          <SurveyorRoutes>
+            <UpdateForm />
+          </SurveyorRoutes>
         ),
       },
     ],

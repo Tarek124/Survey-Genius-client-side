@@ -25,7 +25,7 @@ const SurveyDetail = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
-  const { data: survey = [], refetch } = useQuery({
+  const { data: survey = [], refetch: surveyRefch } = useQuery({
     queryKey: ["survey", id],
     queryFn: async () => {
       if (user.email) {
@@ -61,10 +61,13 @@ const SurveyDetail = () => {
         userEmail: user.email,
         optionVote,
         totalVotes,
+        title: survey.title,
+        time: moment().format("llll"),
+        response: survey?.options[selectedOption]?.option,
       };
       axiosSecure.post("/submitVote", data).then((res) => {
         console.log(res.data);
-        refetch();
+        surveyRefch();
       });
     } else {
       Swal.fire({
@@ -164,7 +167,7 @@ const SurveyDetail = () => {
                 ) : (
                   <button
                     onClick={handleSubmit}
-                    className="btn w-32 btn-info text-white shadow-md mt-4"
+                    className="btn btn-sm px-6 btn-info text-white shadow-md"
                   >
                     Submit
                   </button>

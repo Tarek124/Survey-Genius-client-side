@@ -30,17 +30,16 @@ const AuthContext = ({ children }) => {
             localStorage.setItem("access-token", res.data.token);
           }
         });
+        axiosPublic
+      .get(`/userRole?email=${user?.email}`)
+      .then((res) => setUserRole(res.data?.role));
       } else {
         localStorage.removeItem("access-token");
       }
     });
     return () => unsubscribe();
   }, [axiosPublic]);
-  useEffect(() => {
-    axiosPublic
-      .get(`/userRole?email=${user?.email}`)
-      .then((res) => setUserRole(res.data?.role));
-  }, [axiosPublic, user]);
+
   const createUser = (email, password) => {
     setloading(true);
     return createUserWithEmailAndPassword(auth, email, password);

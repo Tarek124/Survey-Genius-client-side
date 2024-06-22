@@ -62,23 +62,62 @@ const Dashboard = () => {
             <h1 className="text-3xl px-4 py-6 font-semibold font-serif">
               Survey Genius
             </h1>
-            {userRole === "user" ||
-              (userRole === "pro-user" && (
-                <>
-                  <li>
-                    <Link to="/dashboard/user/surveys">User Serveys</Link>
-                  </li>
-                  <li>
-                    <Link to="/dashboard/user/my-reports">My Reports</Link>
-                  </li>
-                  {userRole === "pro-user" && (
-                    <li>
-                      <Link to="user/comments">Comments</Link>
-                    </li>
-                  )}
-                </>
-              ))}
+            {userRole === "pro-user" && (
+              <>
+                <li>
+                  <Link to="/dashboard/user/surveys">User Serveys</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/user/my-reports">My Reports</Link>
+                </li>
 
+                <li>
+                  <Link to="user/comments">Comments</Link>
+                </li>
+              </>
+            )}
+            {userRole === "surveyor" && (
+              <>
+                <li>
+                  <Link to="/dashboard/surveyor/create">Create Survey</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/surveyor/update">Update Survey</Link>
+                </li>
+
+                <li>
+                  <Link to="/dashboard/surveyor/surveys">MY Surveys</Link>
+                </li>
+              </>
+            )}
+            {userRole === "user" && (
+              <>
+                <li>
+                  <Link to="/dashboard/user/surveys">User Serveys</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/user/my-reports">My Reports</Link>
+                </li>
+                {userRole === "pro-user" && (
+                  <li>
+                    <Link to="user/comments">Comments</Link>
+                  </li>
+                )}
+              </>
+            )}
+            {userRole === "admin" && (
+              <>
+                <li>
+                  <Link to="/dashboard/admin/users">Manage Users</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/admin/surveys">Manage Surveys</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/admin/payments">Payments</Link>
+                </li>
+              </>
+            )}
             <div className="divider px-4"></div>
             <li className="tracking-wide">
               <Link to="/">Home</Link>

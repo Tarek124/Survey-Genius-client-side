@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Surveys = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortOrder, setSortOrder] = useState("desc");
-  const { allSurveys } = useAllSurveys();
+  const { allSurveys, isLoading } = useAllSurveys();
 
   const filteredSurveys = allSurveys
     .filter((survey) =>
@@ -19,7 +19,7 @@ const Surveys = () => {
       sortOrder === "asc" ? a.votes - b.votes : b.votes - a.votes
     );
 
-  return (
+  return !isLoading ? (
     <div className="mt-20 p-4">
       <div className="max-w-7xl mx-auto">
         <div className="md:flex ">
@@ -66,6 +66,10 @@ const Surveys = () => {
           ))}
         </div>
       </div>
+    </div>
+  ) : (
+    <div className="h-screen justify-center flex items-center">
+      <span className="loading loading-spinner loading-lg"></span>
     </div>
   );
 };
