@@ -108,13 +108,8 @@ const Login = () => {
               Login Now
             </button>
           </form>
-          <div className="flex items-center w-full gap-2 justify-center mt-3">
-            <div className="h-[1px] bg-[#E7E2FF] w-1/4" />
-            <p>
-              <span className="font-semibold">Login </span>with Others
-            </p>
-            <div className="h-[1px] bg-[#E7E2FF] w-1/4" />
-          </div>
+
+          <div className="divider"></div>
           <button onClick={googleLogin} className="mt-4 btn w-full">
             <FaGoogle /> Login with google
           </button>

@@ -10,7 +10,11 @@ const AllUsers = () => {
   const { swalSuccess } = useSwal();
   const [roleFilter, setRoleFilter] = useState(""); // State for role filter
 
-  const { data: allUsers = [], refetch } = useQuery({
+  const {
+    data: allUsers = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["allusers"],
     queryFn: async () => {
       const res = await axiosSecure.get("/admin/allUsers");
@@ -75,83 +79,89 @@ const AllUsers = () => {
         </select>
       </div>
 
-      <div className="overflow-x-auto min-h-[90vh]">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredUsers?.map((user, inx) => (
-              <tr key={user._id}>
-                <th>{inx + 1}</th>
-                <td>{user?.name}</td>
-                <td>{user?.email}</td>
-                <td>
-                  <div className="dropdown dropdown-end">
-                    <div
-                      tabIndex={0}
-                      role="button"
-                      className="hover:underline m-1"
-                    >
-                      {user?.role}
-                    </div>
-                    <ul
-                      tabIndex={0}
-                      className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-                    >
-                      <li
-                        onClick={() =>
-                          handleRole({ role: "admin", userId: user._id })
-                        }
-                      >
-                        <a>admin</a>
-                      </li>
-                      <li
-                        onClick={() =>
-                          handleRole({ role: "surveyor", userId: user._id })
-                        }
-                      >
-                        <a>surveyor</a>
-                      </li>
-                      <li
-                        onClick={() =>
-                          handleRole({ role: "pro-user", userId: user._id })
-                        }
-                      >
-                        <a>pro-user</a>
-                      </li>
-                      <li
-                        onClick={() =>
-                          handleRole({ role: "user", userId: user._id })
-                        }
-                      >
-                        <a>user</a>
-                      </li>
-                    </ul>
-                  </div>
-                </td>
-                <td>
-                  <button
-                    onClick={() =>
-                      handleUser({ id: user._id, email: user?.email })
-                    }
-                    className="btn rounded-full my-1"
-                  >
-                    <CiTrash />
-                  </button>
-                </td>
+      {!isLoading ? (
+        <div className="overflow-x-auto min-h-[90vh]">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {filteredUsers?.map((user, inx) => (
+                <tr key={user._id}>
+                  <th>{inx + 1}</th>
+                  <td>{user?.name}</td>
+                  <td>{user?.email}</td>
+                  <td>
+                    <div className="dropdown dropdown-end">
+                      <div
+                        tabIndex={0}
+                        role="button"
+                        className="hover:underline m-1"
+                      >
+                        {user?.role}
+                      </div>
+                      <ul
+                        tabIndex={0}
+                        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                      >
+                        <li
+                          onClick={() =>
+                            handleRole({ role: "admin", userId: user._id })
+                          }
+                        >
+                          <a>admin</a>
+                        </li>
+                        <li
+                          onClick={() =>
+                            handleRole({ role: "surveyor", userId: user._id })
+                          }
+                        >
+                          <a>surveyor</a>
+                        </li>
+                        <li
+                          onClick={() =>
+                            handleRole({ role: "pro-user", userId: user._id })
+                          }
+                        >
+                          <a>pro-user</a>
+                        </li>
+                        <li
+                          onClick={() =>
+                            handleRole({ role: "user", userId: user._id })
+                          }
+                        >
+                          <a>user</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() =>
+                        handleUser({ id: user._id, email: user?.email })
+                      }
+                      className="btn rounded-full my-1"
+                    >
+                      <CiTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="h-screen justify-center flex items-center">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      )}
     </div>
   );
 };

@@ -66,6 +66,10 @@ const Comments = () => {
             </div>
           ))}
         </div>
+      ) : isLoading ? (
+        <div className="h-screen justify-center flex items-center">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
       ) : (
         <p className="mt-10 lg:mx-4 text-lg font-semibold">
           No comment on any survey.
