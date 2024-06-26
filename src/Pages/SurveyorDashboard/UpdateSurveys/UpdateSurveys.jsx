@@ -30,7 +30,7 @@ const UpdateSurveys = () => {
                 <td>
                   <Link
                     to={`/dashboard/surveyor/update/${survey._id}`}
-                    className="btn bg-cyan-300"
+                    className="btn"
                   >
                     update
                   </Link>

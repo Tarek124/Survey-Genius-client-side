@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "https://assignment-12-server-eosin-eta.vercel.app",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 const useAxiosSecure = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const useAxiosSecure = () => {
   axiosSecure.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("access-token");
-      console.log("Token from local storage: ", token); // Debugging log
+      // console.log("Token from local storage: ", token); // Debugging log
       if (token) {
         config.headers.mytoken = token; // Custom header
       }

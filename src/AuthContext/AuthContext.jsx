@@ -31,8 +31,8 @@ const AuthContext = ({ children }) => {
           }
         });
         axiosPublic
-      .get(`/userRole?email=${user?.email}`)
-      .then((res) => setUserRole(res.data?.role));
+          .get(`/userRole?email=${user?.email}`)
+          .then((res) => setUserRole(res.data?.role));
       } else {
         localStorage.removeItem("access-token");
       }
@@ -63,6 +63,7 @@ const AuthContext = ({ children }) => {
     setloading(true);
     return signOut(auth);
   };
+
   const allData = {
     loading,
     createUser,

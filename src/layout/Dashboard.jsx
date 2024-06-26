@@ -58,7 +58,7 @@ const Dashboard = () => {
             className="drawer-overlay"
           ></label>
 
-          <ul className="menu font-semibold tracking-wide p-4 w-80 min-h-full bg-slate-100 text-base-content">
+          <ul className="menu font-semibold tracking-wide p-4 w-80 min-h-full glass text-base-content">
             <h1 className="text-3xl px-4 py-6 font-semibold font-serif">
               Survey Genius
             </h1>

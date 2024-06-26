@@ -2,8 +2,25 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useSwal from "../../hooks/useSwal";
 import { LuCrown } from "react-icons/lu";
-import { FaCrown } from "react-icons/fa6";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const themes = [
+  "light",
+  "dark",
+  "cupcake",
+  "corporate",
+  "synthwave",
+  "retro",
+  "cyberpunk",
+  "halloween",
+  "garden",
+  "forest",
+  "lofi",
+  "black",
+  "night",
+  "coffee",
+  "winter",
+];
 
 const Navbar = () => {
   const { user, logout, userRole } = useAuth();
@@ -13,10 +30,30 @@ const Navbar = () => {
     logout().then(() => navigate("/"), swalSuccess("logout success"));
   };
 
+  //theme
+  const [selectedTheme, setSelectedTheme] = useState("");
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme && themes.includes(storedTheme)) {
+      setSelectedTheme(storedTheme);
+      document.documentElement.setAttribute("data-theme", storedTheme);
+    } else {
+      setSelectedTheme("light"); // Default theme
+    }
+  }, []);
+
+  const handleThemeChange = (e) => {
+    const theme = e.target.value;
+    setSelectedTheme(theme);
+    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+  };
+
   useEffect(() => {
     // Use useEffect to force a re-render when user or userRole changes
   }, [user, userRole]); // Specify dependencies that trigger useEffect
-console.log(user,userRole)
+  console.log(user, userRole);
   const navLink = (
     <>
       <li className="tracking-wide">
@@ -57,7 +94,7 @@ console.log(user,userRole)
     </>
   );
   return (
-    <div className="navbar bg-white bg-opacity-40 backdrop-blur-md fixed top-0 left-0 z-10 lg:px-32 shadow-md">
+    <div className="navbar  bg-opacity-40 backdrop-blur-md fixed top-0 left-0 z-10 lg:px-32 shadow-md py-0">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -94,12 +131,23 @@ console.log(user,userRole)
         <ul className="menu menu-horizontal px-1 font-semibold">{navLink}</ul>
       </div>
       <div className="navbar-end">
+        <select
+          className="select mx-2 bg-transparent border border-[#7f7e7f38] "
+          value={selectedTheme}
+          onChange={handleThemeChange}
+        >
+          <option disabled value="">
+            Theme
+          </option>
+          {themes.map((theme) => (
+            <option key={theme} value={theme}>
+              {theme}
+            </option>
+          ))}
+        </select>
         {user ? (
           <div className="dropdown dropdown-end">
             <div className="flex items-center gap-2">
-              {userRole === "pro-user" && (
-                <FaCrown className="text-yellow-500 text-2xl " />
-              )}
               <div
                 tabIndex={0}
                 role="button"

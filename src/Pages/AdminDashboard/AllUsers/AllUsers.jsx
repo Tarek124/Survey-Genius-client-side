@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { CiTrash } from "react-icons/ci";
 import useSwal from "../../../hooks/useSwal";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -34,8 +35,27 @@ const AllUsers = () => {
     roleFilter ? user.role === roleFilter : true
   );
 
+  const handleUser = ({ id, email }) => {
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.post("/deleteUser", { id, email }).then((res) => {
+          if (res?.data?.deletedCount > 0) {
+            swalSuccess("User deleted successfully");
+            refetch();
+          }
+        });
+      }
+    });
+  };
   return (
-    <div className="m-4 p-4 shadow-md ">
+    <div className="m-4 p-8 shadow-md border border-[#7f7e7f38] rounded">
       <h1 className="text-xl font-bold ">All User</h1>
 
       <div className="my-4">
@@ -75,7 +95,11 @@ const AllUsers = () => {
                 <td>{user?.email}</td>
                 <td>
                   <div className="dropdown dropdown-end">
-                    <div tabIndex={0} role="button" className="hover:underline m-1">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      className="hover:underline m-1"
+                    >
                       {user?.role}
                     </div>
                     <ul
@@ -113,8 +137,15 @@ const AllUsers = () => {
                     </ul>
                   </div>
                 </td>
-                <td className="btn rounded-full my-1">
-                  <CiTrash />
+                <td>
+                  <button
+                    onClick={() =>
+                      handleUser({ id: user._id, email: user?.email })
+                    }
+                    className="btn rounded-full my-1"
+                  >
+                    <CiTrash />
+                  </button>
                 </td>
               </tr>
             ))}

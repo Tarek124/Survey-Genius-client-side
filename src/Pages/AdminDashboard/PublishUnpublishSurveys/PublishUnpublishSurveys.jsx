@@ -40,7 +40,7 @@ const PublishUnpublishSurveys = () => {
   };
   return (
     <div className="p-4">
-      <div>
+      <div className="border border-[#7f7e7f38] p-8 rounded">
         <h1 className="text-xl font-bold">Publish Surveys</h1>
         <div className="overflow-x-auto">
           <table className="table table-zebra">
@@ -63,7 +63,7 @@ const PublishUnpublishSurveys = () => {
                   <td>{survey.votes}</td>
                   <td>
                     <button
-                      className="btn btn-sm bg-green-300"
+                      className="btn btn-sm"
                       onClick={() =>
                         handleSurveys({
                           id: survey._id,
@@ -80,7 +80,7 @@ const PublishUnpublishSurveys = () => {
           </table>
         </div>
       </div>{" "}
-      <div className="my-12">
+      <div className="my-12 border border-[#7f7e7f38] p-8 rounded">
         <h1 className="text-xl font-bold">Unpublish Surveys</h1>
         <div className="overflow-x-auto">
           <table className="table table-zebra">
@@ -106,7 +106,7 @@ const PublishUnpublishSurveys = () => {
                       onClick={() =>
                         handleSurveys({ id: survey._id, condition: "publish" })
                       }
-                      className="btn btn-sm bg-orange-300"
+                      className="btn btn-sm"
                     >
                       publish
                     </button>

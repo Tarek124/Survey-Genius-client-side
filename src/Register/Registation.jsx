@@ -7,7 +7,7 @@ import { IoMdPhotos } from "react-icons/io";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Registation = () => {
-  const { createUser, updateUser } = useAuth();
+  const { createUser, updateUser, user } = useAuth();
   const { swalErr, swalSuccess } = useSwal();
   const axiosPublic = useAxiosPublic();
   const location = useLocation();
@@ -21,15 +21,15 @@ const Registation = () => {
     const password = form.password.value;
     const photoURL = form.photoURL.value;
     const email = myEmail.toLowerCase();
-    const userData = { email, name, role: "user" };
+    const userData = { email, name, role: "user", user };
     createUser(email, password)
-      .then(() => {
+      .then((res) => {
         updateUser(name, photoURL)
           .then(() => {
             axiosPublic
-              .post("users", userData)
+              .post("users", { ...userData, user: res.user })
               .then(() => {
-                swalSuccess("Login successfully");
+                swalSuccess("Registation successfully");
                 navigate(myLocation);
                 form.reset();
               })
@@ -41,7 +41,6 @@ const Registation = () => {
             console.log(err);
             swalErr("username or photo url is not valid");
           });
-        swalSuccess("Registration successfully");
       })
       .catch((err) => {
         console.log(err);
@@ -49,9 +48,9 @@ const Registation = () => {
       });
   };
   return (
-    <div className="bg-[#E7E2FF] mt-16 p-4 flex justify-center">
+    <div className="mt-16 p-4 flex justify-center">
       <div
-        className="bg-white my-8 lg:w-[50vw] w-full flex rounded-xl overflow-hidden
+        className="border border-[#7f7e7f38] my-8 lg:w-[50vw] w-full flex rounded-xl overflow-hidden
       required shadow-lg items-center"
       >
         <form
@@ -59,7 +58,7 @@ const Registation = () => {
           className="lg:w-[50vw] w-full flex flex-col items-center p-6 lg:p-20 gap-4"
         >
           <h1 className="text-xl font-semibold">REGISTER</h1>
-          <label className="input bg-[#E7E2FF] flex items-center gap-2 w-full">
+          <label className="input border-[#7f7e7f38] flex items-center gap-2 w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -76,7 +75,7 @@ const Registation = () => {
               required
             />
           </label>
-          <label className="input bg-[#E7E2FF] flex items-center gap-2 w-full">
+          <label className="input border-[#7f7e7f38] flex items-center gap-2 w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -94,7 +93,7 @@ const Registation = () => {
               required
             />
           </label>
-          <label className="input bg-[#E7E2FF] w-full flex items-center gap-2">
+          <label className="input border-[#7f7e7f38] w-full flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -115,7 +114,7 @@ const Registation = () => {
               required
             />
           </label>{" "}
-          <label className="input bg-[#E7E2FF] w-full flex items-center gap-2">
+          <label className="input border-[#7f7e7f38] w-full flex items-center gap-2">
             <div className="opacity-[70%]">
               <IoMdPhotos />
             </div>

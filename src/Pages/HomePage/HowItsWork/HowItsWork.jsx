@@ -1,10 +1,5 @@
 const howItWorksSteps = [
   {
-    title: "Sign Up or Log In",
-    description:
-      "Create a new account or log in to your existing account to start exploring and participating in surveys.",
-  },
-  {
     title: "Browse Surveys",
     description:
       "Explore a variety of surveys available on our platform. You can browse through the featured and latest surveys sections to find ones that interest you.",
@@ -28,21 +23,19 @@ const howItWorksSteps = [
 
 const HowItsWork = () => {
   return (
-    <div className="relative px-4 py-12  half-bg mx-auto">
-      <div className=" py-8 flex flex-col gap-4 justify-center items-center">
-        <h1 className="mb-4 text-white text-4xl">How it Works</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
-          {howItWorksSteps.map((step, index) => (
-            <div key={index}>
-              <div className="card sm:w-60 min-h-[300px] bg-base-100 shadow-xl">
-                <div className="card-body">
-                  <h2 className="card-title">{step.title}</h2>
-                  <p>{step.description}</p>
-                </div>
+    <div className="py-12 px-10 flex flex-col gap-4 justify-center items-center max-w-7xl mx-auto rounded border border-[#7f7e7f38]">
+      <h1 className="mb-4 text-4xl">How it Works</h1>
+      <div className="flex justify-around w-full flex-wrap">
+        {howItWorksSteps.map((step, index) => (
+          <div key={index}>
+            <div className="card sm:w-60 min-h-[300px] bg-base-100 shadow-xl">
+              <div className="card-body">
+                <h2 className="card-title">{step.title}</h2>
+                <p>{step.description}</p>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );

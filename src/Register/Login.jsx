@@ -34,7 +34,12 @@ const Login = () => {
       .then((res) => {
         console.log(res.user);
         const { email, displayName } = res.user;
-        const userData = { email, name: displayName, role: "user" };
+        const userData = {
+          email,
+          name: displayName,
+          role: "user",
+          user: res.user,
+        };
 
         axiosPublic
           .post("users", userData)
@@ -52,15 +57,15 @@ const Login = () => {
       });
   };
   return (
-    <div className="bg-[#E7E2FF] mt-16 p-4 flex justify-center">
-      <div className="bg-white my-8 lg:w-[50vw] w-full overflow-hidden flex rounded-xl shadow-lg items-center">
+    <div className="mt-16 p-4 flex justify-center">
+      <div className="border border-[#7f7e7f38] my-8 lg:w-[50vw] w-full overflow-hidden flex rounded-xl shadow-lg items-center">
         <div
           onSubmit={handleLogin}
           className="w-full flex flex-col items-center p-6 lg:p-20 gap-4"
         >
           <form className=" w-full flex flex-col items-center gap-4">
             <h1 className="text-xl font-semibold">LOGIN</h1>
-            <label className="input bg-[#E7E2FF] flex items-center gap-2 w-full">
+            <label className="input flex items-center gap-2 w-full border-[#7f7e7f38] border">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -78,7 +83,7 @@ const Login = () => {
                 placeholder="Email"
               />
             </label>
-            <label className="input bg-[#E7E2FF] w-full flex items-center gap-2">
+            <label className="input border border-[#7f7e7f38] w-full flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"

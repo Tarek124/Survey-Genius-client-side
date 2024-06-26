@@ -13,7 +13,7 @@ const PaymentAndSurveysResponses = () => {
   console.log(data);
   return !isLoading ? (
     <div className="">
-      <div className="p-4 mx-4 shadow-lg my-10">
+      <div className="mx-4 shadow-lg my-10 border  border-[#7f7e7f38] p-8 rounded">
         <h1 className="text-xl font-bold mb-6">Payments</h1>
         <div className="overflow-x-auto">
           <table className="table">
@@ -39,7 +39,7 @@ const PaymentAndSurveysResponses = () => {
           </table>
         </div>
       </div>{" "}
-      <div className="p-4 mx-4 shadow-lg">
+      <div className="mx-4 shadow-lg border border-[#7f7e7f38] p-8 rounded">
         <h1 className="text-xl font-bold mb-6">Survey Responses</h1>
         <div className="overflow-x-auto">
           <table className="table">

@@ -45,41 +45,36 @@ const UpdateForm = () => {
     }
   };
 
-
   return !isLoading ? (
     <div>
-      <div className="p-4 mx-4 mt-6 shadow-md">
+      <div className="p-8 mx-4 mt-6 shadow-md rounded border border-[#7f7e7f38]">
         <h1 className="text-xl font-bold mb-4">update Survey</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-1">
-              Title
-            </label>
+            <label className="block font-semibold mb-1">Title</label>
             <input
               {...register("title", { required: true })}
-              className="border rounded p-2 w-full"
+              className="border border-[#7f7e7f38] rounded p-2 w-full"
               type="text"
               defaultValue={survey?.title}
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-1">
-              Description
-            </label>
+            <label className="block font-semibold mb-1">Description</label>
             <textarea
               {...register("description", { required: true })}
-              className="border rounded p-2 w-full"
+              className="border border-[#7f7e7f38] rounded p-2 w-full"
               defaultValue={survey?.description}
             />
           </div>
-         
+
           <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-1">
+            <label className="block font-semibold mb-1">
               Category ({survey?.category})
             </label>
             <select
               {...register("category", { required: true })}
-              className="border rounded p-2 w-full"
+              className="border border-[#7f7e7f38] rounded p-2 w-full"
             >
               <option value="Technology">Technology</option>
               <option value="Health">Health</option>
@@ -93,12 +88,12 @@ const UpdateForm = () => {
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-1">
+            <label className="block font-semibold mb-1">
               Deadline ({survey?.deadline})
             </label>
             <input
               {...register("deadline")}
-              className="border rounded p-2 w-full"
+              className="border border-[#7f7e7f38] rounded p-2 w-full"
               type="date"
             />
           </div>

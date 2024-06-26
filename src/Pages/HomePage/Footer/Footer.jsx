@@ -6,7 +6,7 @@ import { FaCrown } from "react-icons/fa6";
 const Footer = () => {
   const { userRole } = useAuth();
   return (
-    <div className="bg-sky-200">
+    <div className="border-t border-[#7f7e7f38] pt-10">
       <footer className="footer p-10 max-w-7xl mx-auto text-base-content">
         <nav>
           <h6 className="footer-title">Services</h6>

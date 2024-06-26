@@ -7,6 +7,8 @@ import useAuth from "../../hooks/useAuth";
 import moment from "moment";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { HiDotsVertical } from "react-icons/hi";
+
 import {
   AreaChart,
   Area,
@@ -86,9 +88,21 @@ const SurveyDetail = () => {
     if (comment.length === 0) {
       return alert("Please enter a comment");
     }
+    if (editComment?.comment?.length > 0) {
+      return axiosPublic
+        .post("/EditComment", { comment, id: editComment.id })
+        .then((res) => {
+          if (res.data?.modifiedCount) {
+            commentsRefetch();
+            setEditComment({ comment: "", id: "" });
+          }
+          e.target.reset();
+        });
+    }
     const commentData = {
       name: user.displayName,
       image: user.photoURL,
+      email: user.email,
       comment,
       time: moment().format("llll"),
       surveyId: id,
@@ -99,6 +113,7 @@ const SurveyDetail = () => {
         e.target.reset();
       }
     });
+
     console.log(commentData);
   };
 
@@ -111,7 +126,7 @@ const SurveyDetail = () => {
   const buttonRef = useRef(null);
 
   const handleReportSubmit = async () => {
-    axiosPublic
+    axiosSecure
       .post("/report", {
         surveyId: survey._id,
         reason: reportReason,
@@ -133,11 +148,35 @@ const SurveyDetail = () => {
         }
       });
   };
+
+  // edit comment
+
+  const [editComment, setEditComment] = useState({});
+
+  const handleEditComment = (id) => {
+    const myComment = comments.find((comment) => comment._id === id);
+    if (myComment) {
+      setEditComment({ comment: myComment.comment, id });
+
+      //  console.log(editComment);
+    }
+  };
+
+  //delete comment
+
+  function handleDelete(id) {
+    axiosSecure.post("/deleteComment", { id }).then((res) => {
+      if (res.data?.deletedCount) {
+        commentsRefetch();
+        setEditComment({ comment: "", id: "" });
+      }
+    });
+  }
   return (
-    <div className="bg-purple-300 flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen">
       {user && survey.length !== 0 ? (
         <div className="lg:w-1/2 px-2">
-          <div className="card bg-base-100 shadow-xl">
+          <div className="card shadow-xl">
             <div className="card-body lg:p-8 p-4">
               <h2 className="card-title">{survey?.title}:</h2>
               <p className="font-medium">{survey?.description}</p>
@@ -161,7 +200,7 @@ const SurveyDetail = () => {
               </div>
               <div className="flex items-center justify-start flex-wrap gap-4 mt-3">
                 {survey?.voted ? (
-                  <p disabled className="btn btn-sm text-slate-500">
+                  <p disabled className="btn btn-sm">
                     Voted
                   </p>
                 ) : (
@@ -176,7 +215,7 @@ const SurveyDetail = () => {
                   onClick={() =>
                     document.getElementById("my_modal_3").showModal()
                   }
-                  className="btn btn-sm text-slate-500"
+                  className="btn btn-sm"
                 >
                   {comments?.length} comments
                 </p>
@@ -185,7 +224,7 @@ const SurveyDetail = () => {
                     onClick={() =>
                       document.getElementById("my_modal_4").showModal()
                     }
-                    className="btn btn-sm text-slate-500"
+                    className="btn btn-sm"
                   >
                     View Result{" "}
                   </p>
@@ -210,7 +249,7 @@ const SurveyDetail = () => {
                     <h3 className="font-bold text-lg">comments</h3>
                     <div className="h-[70vh] flex flex-col justify-end">
                       {/* add comment here */}
-                      <div className="overflow-y-auto">
+                      <div className="overflow-y-auto h-full mt-2">
                         {comments.map((comment) => (
                           <div key={comment?._id} className="chat chat-start">
                             <div className="chat-image avatar">
@@ -227,8 +266,36 @@ const SurveyDetail = () => {
                               </time>
                             </div>
                             <div className="chat-bubble">
-                              <div className="font-semibold text-sm text-[#f2f2f2c4]">
+                              <div className="font-semibold text-sm text-[#f2f2f2c4] flex items-center gap-1">
                                 {comment?.name}
+                                {comment?.email == user.email ? (
+                                  <div className="dropdown dropdown-end">
+                                    <div tabIndex="0" role="button">
+                                      <HiDotsVertical />
+                                    </div>
+                                    <ul
+                                      tabIndex="0"
+                                      className="dropdown-content z-[1] menu p-2 shadow bg-blue-100 text-black rounded-box w"
+                                    >
+                                      <li
+                                        onClick={() =>
+                                          handleEditComment(comment._id)
+                                        }
+                                      >
+                                        <a>Edit</a>
+                                      </li>
+                                      <li
+                                        onClick={() =>
+                                          handleDelete(comment._id)
+                                        }
+                                      >
+                                        <a>Delete</a>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                ) : (
+                                  ""
+                                )}
                               </div>
                               {comment?.comment}
                             </div>
@@ -241,8 +308,9 @@ const SurveyDetail = () => {
                       >
                         <input
                           name="comment"
-                          className="bg-[#f5f4f4fb] w-full outline-none px-4 rounded-l-md"
+                          className="w-full outline-none px-4 rounded-l-md"
                           placeholder="Write a comment..."
+                          defaultValue={editComment.comment}
                         />
                         <button
                           disabled={userRole !== "pro-user"}
@@ -306,11 +374,11 @@ const SurveyDetail = () => {
                         value={reportReason}
                         onChange={(e) => setReportReason(e.target.value)}
                         placeholder="Describe why you are reporting this survey"
-                        className="textarea border shadow-md w-full bg-[#f1f0f0]"
+                        className="textarea border shadow-md w-full"
                       />
                       <button
                         onClick={handleReportSubmit}
-                        className="btn bg-lime-300 mt-4 "
+                        className="btn mt-4 "
                       >
                         Submit Report
                       </button>

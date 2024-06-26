@@ -51,26 +51,22 @@ const CreateSurveys = () => {
   };
 
   return (
-    <div className="m-4 p-4 shadow-md">
+    <div className="m-4 p-8 shadow-lg border-[#7f7e7f38] border rounded ">
       <h1 className="text-xl font-bold mb-4">Create Survey</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
-            Title
-          </label>
+          <label className="block font-semibold mb-1">Title</label>
           <input
             {...register("title", { required: true })}
-            className="border rounded p-2 w-full"
+            className="border border-[#7f7e7f38] rounded p-2 w-full"
             type="text"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
-            Description
-          </label>
+          <label className="block font-semibold mb-1">Description</label>
           <textarea
             {...register("description", { required: true })}
-            className="border rounded p-2 w-full"
+            className="border border-[#7f7e7f38] rounded p-2 w-full"
           />
         </div>
         <div className="mb-4">
@@ -80,7 +76,7 @@ const CreateSurveys = () => {
           {options.map((option, index) => (
             <input
               key={index}
-              className="border rounded p-2 w-full mb-2"
+              className="border border-[#7f7e7f38] rounded p-2 w-full mb-2"
               type="text"
               value={option.option}
               onChange={(e) => handleOptionChange(index, e.target.value)}
@@ -88,12 +84,10 @@ const CreateSurveys = () => {
           ))}
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
-            Category
-          </label>
+          <label className="block font-semibold mb-1">Category</label>
           <select
             {...register("category", { required: true })}
-            className="border rounded p-2 w-full"
+            className="border border-[#7f7e7f38] rounded p-2 w-full"
           >
             <option value="Technology">Technology</option>
             <option value="Health">Health</option>
@@ -107,12 +101,10 @@ const CreateSurveys = () => {
           </select>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
-            Deadline
-          </label>
+          <label className="block font-semibold mb-1">Deadline</label>
           <input
             {...register("deadline", { required: true })}
-            className="border rounded p-2 w-full"
+            className="border border-[#7f7e7f38] rounded p-2 w-full"
             type="date"
           />
         </div>

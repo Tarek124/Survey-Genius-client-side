@@ -4,14 +4,19 @@ import Footer from "./Footer/Footer";
 import HeroSection from "./HeroSection/HeroSection";
 import HowItsWork from "./HowItsWork/HowItsWork";
 import LatestSurveys from "./LatestSurveys/LatestSurveys";
+import ParallaxTextScroll from "./ParallaxText/ParallaxText";
+import { TracingBeam } from "./TracingBeam/TracingBeam";
 
 const HomePage = () => {
   return (
     <div>
       <HeroSection />
-      <FeaturedSurveys />
-      <LatestSurveys />
-      <HowItsWork />
+      <TracingBeam>
+        <FeaturedSurveys />
+        <LatestSurveys />
+        <HowItsWork />
+      </TracingBeam>
+      <ParallaxTextScroll />
       <FAQs />
       <Footer />
     </div>

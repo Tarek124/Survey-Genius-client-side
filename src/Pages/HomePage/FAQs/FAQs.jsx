@@ -1,5 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
-import img from "./undraw_Questions_re_1fy7.png";
+
 import useAuth from "../../../hooks/useAuth";
 
 const faqs = [
@@ -32,19 +31,8 @@ const faqs = [
 const FAQs = () => {
   const { user } = useAuth();
   return (
-    <div className="mt-4">
-      <div className="flex h-1/2 justify-center p-4 ">
-        <div className="my-8 lg:w-1/3 pt-8">
-          <h1 className="text-5xl font-bold my-4">FAQs</h1>
-          <p className="text-xl">
-            Have questions? Here you'll find the answers most valued by out
-            partners, along with access to step-by-step instructions and
-            support.
-          </p>
-        </div>
-        <img className="hidden lg:flex w-1/3" src={img} alt="" />
-      </div>
-      <div className="bg-[#FFF0F5] px-4 py-20">
+    <div className="mt-12 mx-auto max-w-7xl border border-[#7f7e7f38] px-8 rounded mb-20">
+      <div className="px-8 py-20">
         <div className="max-w-7xl mx-auto lg:flex gap-4">
           <div className="lg:w-1/2 mb-8 lg:pr-8">
             <form>
@@ -73,12 +61,19 @@ const FAQs = () => {
                 className="textarea textarea-bordered w-full my-2"
                 placeholder="right here"
               />
-              <input type="submit" value="Submit" className="btn btn-primary" />
+              <input
+                type="submit"
+                value="Submit"
+                className="btn btn-primary text-white"
+              />
             </form>
           </div>
-          <div>
+          <div className="border-[#7f7e7f38] border p-6 rounded">
             {faqs.map((faq, index) => (
-              <div key={index} className="collapse bg-[#f8dee7] my-2">
+              <div
+                key={index}
+                className="collapse shadow-xl border border-[#7f7e7f38] my-2"
+              >
                 <input type="checkbox" />
                 <div className="collapse-title text-xl font-medium">
                   {faq.question}

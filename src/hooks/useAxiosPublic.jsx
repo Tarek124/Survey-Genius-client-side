@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-  baseURL: "https://assignment-12-server-eosin-eta.vercel.app",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 const useAxiosPublic = () => {

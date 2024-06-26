@@ -12,8 +12,8 @@ const LatestSurveys = () => {
     },
   });
   return (
-    <div className="bg-[#F5FFFA]">
-      <div className="max-w-7xl mx-auto py-20 ">
+    <div>
+      <div className="max-w-7xl mx-auto py-20 border border-[#7f7e7f38] rounded my-10 px-10">
         <h1 className="my-6 mx-4 text-4xl font-semibold">Latest Surveys</h1>
         <div className="p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {data?.map((item) => (

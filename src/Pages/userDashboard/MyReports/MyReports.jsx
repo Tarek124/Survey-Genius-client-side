@@ -16,24 +16,22 @@ const MyReports = () => {
   });
   console.log(data);
   return user ? (
-    <div className="p-4 bg-emerald-200 h-screen">
+    <div className="p-4 lg:p-10">
       <h1 className="lg:m-4 text-2xl font-bold">Reports</h1>
       {data?.length !== 0 ? (
         <div className="my-4">
           {data?.map((report) => (
             <div
               key={report._id}
-              className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4"
+              className="max-w-sm shadow-lg rounded-lg overflow-hidden my-4 border border-[#7f7e7f38] "
             >
               <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{report.title}</div>
-                <p className="text-gray-700 text-base mb-4">
-                  {report.description}
-                </p>
-                <p className="text-gray-600 text-sm">
+                <p className="text-base mb-4">{report.description}</p>
+                <p className="text-sm">
                   <strong>Reason for Report:</strong> {report.reason}
                 </p>
-                <p className="text-gray-600 text-sm">
+                <p className="text-sm">
                   <strong>Survey ID:</strong> {report.surveyId}
                 </p>
               </div>
