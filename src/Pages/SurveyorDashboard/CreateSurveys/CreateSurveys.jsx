@@ -51,7 +51,7 @@ const CreateSurveys = () => {
   };
 
   return (
-    <div className="m-4 p-8 shadow-lg border-[#7f7e7f38] border rounded ">
+    <div className="sm:m-4 m-2 sm:p-8 p-4 shadow-lg border-[#7f7e7f38] border rounded ">
       <h1 className="text-xl font-bold mb-4">Create Survey</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
@@ -70,7 +70,7 @@ const CreateSurveys = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
+          <label className="block font-semibold mb-1">
             Options
           </label>
           {options.map((option, index) => (

@@ -3,6 +3,25 @@ import useAuth from "../hooks/useAuth";
 import { LuCrown } from "react-icons/lu";
 import useSwal from "../hooks/useSwal";
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+
+const themes = [
+  "light",
+  "dark",
+  "cupcake",
+  "corporate",
+  "synthwave",
+  "retro",
+  "cyberpunk",
+  "halloween",
+  "garden",
+  "forest",
+  "lofi",
+  "black",
+  "night",
+  "coffee",
+  "winter",
+];
 
 const Dashboard = () => {
   const { user, userRole, logout } = useAuth();
@@ -21,6 +40,27 @@ const Dashboard = () => {
       }
     });
   };
+
+  //theme
+  const [selectedTheme, setSelectedTheme] = useState("");
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme && themes.includes(storedTheme)) {
+      setSelectedTheme(storedTheme);
+      document.documentElement.setAttribute("data-theme", storedTheme);
+    } else {
+      setSelectedTheme("light"); // Default theme
+    }
+  }, []);
+
+  const handleThemeChange = (e) => {
+    const theme = e.target.value;
+    setSelectedTheme(theme);
+    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+  };
+
   return (
     <>
       <div className="drawer lg:drawer-open ">
@@ -124,6 +164,25 @@ const Dashboard = () => {
             </li>
             <li className="tracking-wide">
               <Link to="/surveys">Surveys</Link>
+            </li>{" "}
+            <li>
+              <select
+                className="border border-[#7f7e7f38] "
+                value={selectedTheme}
+                onChange={handleThemeChange}
+              >
+                <option disabled value="">
+                  Theme
+                </option>
+                {themes.map((theme) => (
+                  <option key={theme} value={theme}>
+                    {theme}
+                  </option>
+                ))}
+              </select>
+            </li>
+            <li>
+              <a>{user?.displayName}</a>
             </li>
             {userRole === "user" ? (
               <li className="border rounded shadow-inner tracking-widef">

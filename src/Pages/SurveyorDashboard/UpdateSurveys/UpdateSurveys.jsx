@@ -7,7 +7,7 @@ const UpdateSurveys = () => {
   return !isLoading ? (
     <div>
       <div className="overflow-x-auto p-4">
-        <table className="table">
+        <table className="table sm:table-lg table-xs">
           <thead>
             <tr>
               <th></th> <th>Survey ID</th>

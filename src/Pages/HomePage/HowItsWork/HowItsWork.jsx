@@ -23,9 +23,9 @@ const howItWorksSteps = [
 
 const HowItsWork = () => {
   return (
-    <div className="py-12 px-10 flex flex-col gap-4 justify-center items-center max-w-7xl mx-auto rounded border border-[#7f7e7f38]">
+    <div className="py-12 px-2 sm:px-10 flex flex-col gap-4 justify-center items-center max-w-7xl mx-auto rounded sm:border sm:border-[#7f7e7f38]">
       <h1 className="mb-4 text-4xl">How it Works</h1>
-      <div className="flex justify-around w-full flex-wrap gap-4">
+      <div className="flex justify-around w-full flex-wrap gap-4 p-5">
         {howItWorksSteps.map((step, index) => (
           <div key={index}>
             <div className="card sm:w-60 min-h-[300px] bg-base-100 shadow-xl border border-[#7f7e7f38]">

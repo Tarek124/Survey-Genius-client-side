@@ -11,11 +11,14 @@ const HomePage = () => {
   return (
     <div>
       <HeroSection />
-      <TracingBeam>
-        <FeaturedSurveys />
-        <LatestSurveys />
-        <HowItsWork />
-      </TracingBeam>
+      <div className="overflow-hidden">
+        <TracingBeam>
+          <FeaturedSurveys />
+          <LatestSurveys />
+          <HowItsWork />
+        </TracingBeam>
+      </div>
+
       <ParallaxTextScroll />
       <FAQs />
       <Footer />

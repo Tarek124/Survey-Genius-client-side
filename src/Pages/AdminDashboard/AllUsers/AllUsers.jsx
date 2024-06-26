@@ -59,7 +59,7 @@ const AllUsers = () => {
     });
   };
   return (
-    <div className="m-4 p-8 shadow-md border border-[#7f7e7f38] rounded">
+    <div className="sm:m-4 m-2 p-4 sm:p-8 shadow-md border border-[#7f7e7f38] rounded">
       <h1 className="text-xl font-bold ">All User</h1>
 
       <div className="my-4">
@@ -81,7 +81,7 @@ const AllUsers = () => {
 
       {!isLoading ? (
         <div className="overflow-x-auto min-h-[90vh]">
-          <table className="table">
+          <table className="table table-xs sm:table-lg">
             {/* head */}
             <thead>
               <tr>

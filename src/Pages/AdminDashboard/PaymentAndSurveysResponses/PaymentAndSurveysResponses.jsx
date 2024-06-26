@@ -13,10 +13,10 @@ const PaymentAndSurveysResponses = () => {
   console.log(data);
   return !isLoading ? (
     <div className="">
-      <div className="mx-4 shadow-lg my-10 border  border-[#7f7e7f38] p-8 rounded">
-        <h1 className="text-xl font-bold mb-6">Payments</h1>
+      <div className="mx-4 shadow-lg my-10 border  border-[#7f7e7f38] p-4 sm:p-8 rounded">
+        <h1 className="sm:text-xl font-bold mb-6">Payments</h1>
         <div className="overflow-x-auto">
-          <table className="table">
+          <table className="table sm:table-lg table-xs">
             {/* head */}
             <thead>
               <tr>
@@ -39,10 +39,10 @@ const PaymentAndSurveysResponses = () => {
           </table>
         </div>
       </div>{" "}
-      <div className="mx-4 shadow-lg border border-[#7f7e7f38] p-8 rounded">
-        <h1 className="text-xl font-bold mb-6">Survey Responses</h1>
+      <div className="mx-4 shadow-lg border border-[#7f7e7f38] p-4 sm:p-8 rounded">
+        <h1 className="sm:text-xl font-bold mb-6">Survey Responses</h1>
         <div className="overflow-x-auto">
-          <table className="table">
+          <table className="table sm:table-lg table-xs">
             {/* head */}
             <thead>
               <tr>

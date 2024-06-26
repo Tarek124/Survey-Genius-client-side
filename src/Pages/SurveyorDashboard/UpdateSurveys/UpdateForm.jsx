@@ -47,7 +47,7 @@ const UpdateForm = () => {
 
   return !isLoading ? (
     <div>
-      <div className="p-8 mx-4 mt-6 shadow-md rounded border border-[#7f7e7f38]">
+      <div className="sm:p-8 p-4 ms:mx-4 mx-2 mt-6 shadow-md rounded border border-[#7f7e7f38]">
         <h1 className="text-xl font-bold mb-4">update Survey</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">

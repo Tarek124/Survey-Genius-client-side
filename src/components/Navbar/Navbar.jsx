@@ -122,7 +122,7 @@ const Navbar = () => {
         </div>
         <Link
           to="/"
-          className="text-xl xl:text-3xl p-2 font-semibold font-serif"
+          className="sm:text-xl text-sm xl:text-3xl sm:p-2 font-semibold font-serif"
         >
           Survey Genius
         </Link>
@@ -132,7 +132,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <select
-          className="select mx-2 bg-transparent border border-[#7f7e7f38] "
+          className="select w-24 mx-2 bg-transparent border border-[#7f7e7f38] "
           value={selectedTheme}
           onChange={handleThemeChange}
         >

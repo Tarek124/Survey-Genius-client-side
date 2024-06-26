@@ -19,9 +19,9 @@ const SurveyorSurveys = () => {
     return <NotFoundPage />;
   }
   return !isLoading ? (
-    <div className="p-4">
-      <div className="shadow-lg p-8 rounded mb-10 border border-[#7f7e7f38]">
-        <h1 className="text-xl font-bold">Created Survey</h1>
+    <div className="sm:p-4 p-2">
+      <div className="shadow-lg p-4 sm:p-8 rounded mb-10 border border-[#7f7e7f38]">
+        <h1 className="sm:text-xl font-bold">Created Survey</h1>
         <div className="overflow-x-auto">
           <table className="table">
             <thead>
@@ -48,8 +48,8 @@ const SurveyorSurveys = () => {
           </table>
         </div>
       </div>{" "}
-      <div className="shadow-lg p-8 rounded border border-[#7f7e7f38]">
-        <h1 className="text-xl font-bold">Updated Survey</h1>
+      <div className="shadow-lg p-4 sm:p-8 rounded border border-[#7f7e7f38]">
+        <h1 className="sm:text-xl font-bold">Updated Survey</h1>
         <div className="overflow-x-auto">
           <table className="table">
             <thead>

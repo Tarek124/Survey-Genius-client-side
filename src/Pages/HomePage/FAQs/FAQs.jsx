@@ -31,12 +31,12 @@ const faqs = [
 const FAQs = () => {
   const { user } = useAuth();
   return (
-    <div className="mt-12 mx-auto max-w-7xl border border-[#7f7e7f38] px-8 rounded mb-20">
-      <div className="px-8 py-20">
+    <div className="sm:mt-12 mx-auto max-w-7xl sm:border sm:border-[#7f7e7f38] px-4 sm:px-8 rounded mb-20">
+      <div className="sm:px-8 sm:py-20">
         <div className="max-w-7xl mx-auto lg:flex gap-4">
           <div className="lg:w-1/2 mb-8 lg:pr-8">
             <form>
-              <h1 className="text-3xl font-semibold mb-8">
+              <h1 className="sm:text-3xl font-semibold mb-4 sm:mb-8">
                 Ask your questions
               </h1>
               <label className="input input-bordered flex items-center gap-2">
@@ -59,7 +59,7 @@ const FAQs = () => {
 
               <textarea
                 className="textarea textarea-bordered w-full my-2"
-                placeholder="right here"
+                placeholder="right here..."
               />
               <input
                 type="submit"
@@ -68,7 +68,7 @@ const FAQs = () => {
               />
             </form>
           </div>
-          <div className="border-[#7f7e7f38] border p-6 rounded">
+          <div className="sm:border-[#7f7e7f38] sm:border sm:p-6 rounded">
             {faqs.map((faq, index) => (
               <div
                 key={index}
