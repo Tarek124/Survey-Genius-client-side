@@ -1,11 +1,12 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaGoogle, FaPaypal } from "react-icons/fa";
 import useSwal from "../../hooks/useSwal";
+import { Loading } from "notiflix/build/notiflix-loading-aio";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 
 const CheckOut = () => {
   const [err, setErr] = useState("");
@@ -28,7 +29,10 @@ const CheckOut = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    Loading.standard("Loading...");
+
     if (!stripe || !elements) {
+      Loading.remove();
       return;
     }
 
@@ -43,6 +47,7 @@ const CheckOut = () => {
     });
 
     if (error) {
+      Loading.remove();
       console.log("payment method error", error);
       setErr(error.message);
     } else {
@@ -62,6 +67,7 @@ const CheckOut = () => {
       });
 
     if (confirmError) {
+      Loading.remove();
       console.log("confirm error", confirmError);
       swalErr(confirmError.message);
     } else {
@@ -69,20 +75,20 @@ const CheckOut = () => {
       if (paymentIntent.status === "succeeded") {
         setTransactionId(paymentIntent.id);
         console.log(paymentIntent.id, transactionId);
+
         // now save the payment in the database
         const payment = {
           email: user.email,
           transactionId: paymentIntent.id,
           date: new Date(),
         };
+
         const res = await axiosSecure.post("/payment", payment);
         if (res.data?.paymentResult?.insertedId) {
-          Swal.fire({
-            icon: "success",
-            title: "Thank you for your payment",
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          Notify.success("Sol lucet omnibus");
+        }
+        if (res.data?.paymentResult) {
+          Loading.remove();
         }
         navigate("/");
       }
@@ -97,7 +103,7 @@ const CheckOut = () => {
       </h1>
 
       <form className="mt-8 lg:flex gap-8" onSubmit={handleSubmit}>
-        <div className="lg:w-2/3 rounded-md shadow-md p-6">
+        <div className="lg:w-2/3 rounded-md shadow-md am:p-6">
           <h1 className="text-xl font-semibold mb-4">Payment Details</h1>
           <div className="flex gap-2 my-4">
             <button className="p-3 flex items-center justify-center gap-1 w-1/2 rounded-md shadow">

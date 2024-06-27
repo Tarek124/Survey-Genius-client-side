@@ -1,13 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { CiTrash } from "react-icons/ci";
-import useSwal from "../../../hooks/useSwal";
 import { useState } from "react";
-import Swal from "sweetalert2";
+import { Confirm } from "notiflix/build/notiflix-confirm-aio";
+import toast, { Toaster } from "react-hot-toast";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const { swalSuccess } = useSwal();
   const [roleFilter, setRoleFilter] = useState(""); // State for role filter
 
   const {
@@ -23,12 +22,18 @@ const AllUsers = () => {
   });
 
   const handleRole = ({ role, userId }) => {
-    axiosSecure.post("/admin/role", { role, userId }).then((res) => {
-      if (res?.data?.modifiedCount) {
-        swalSuccess("Role updated successfully");
-        refetch();
+    toast.promise(
+      axiosSecure.post("/admin/role", { role, userId }).then((res) => {
+        if (res?.data?.modifiedCount) {
+          refetch();
+        }
+      }),
+      {
+        loading: "updating...",
+        success: <b>User Role updated!</b>,
+        error: <b>Could not save.</b>,
       }
-    });
+    );
   };
 
   const handleFilterChange = (e) => {
@@ -40,28 +45,32 @@ const AllUsers = () => {
   );
 
   const handleUser = ({ id, email }) => {
-    Swal.fire({
-      title: "Are you sure?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.post("/deleteUser", { id, email }).then((res) => {
-          if (res?.data?.deletedCount > 0) {
-            swalSuccess("User deleted successfully");
-            refetch();
+    Confirm.show(
+      "Are you sure ?",
+      "you can't undo it!",
+      "Yes",
+      "No",
+      () => {
+        toast.promise(
+          axiosSecure.post("/deleteUser", { id, email }).then((res) => {
+            if (res?.data?.deletedCount > 0) {
+              refetch();
+            }
+          }),
+          {
+            loading: "deleting...",
+            success: <b>User deleted!</b>,
+            error: <b>Could not delete.</b>,
           }
-        });
-      }
-    });
+        );
+      },
+      () => {},
+      {}
+    );
   };
   return (
     <div className="sm:m-4 m-2 p-4 sm:p-8 shadow-md border border-[#7f7e7f38] rounded">
       <h1 className="text-xl font-bold ">All User</h1>
-
       <div className="my-4">
         <div className="label">
           <span className="label-text">Filter by Role:</span>
@@ -80,7 +89,7 @@ const AllUsers = () => {
       </div>
 
       {!isLoading ? (
-        <div className="overflow-x-auto min-h-[90vh]">
+        <div className="overflow-x-auto">
           <table className="table table-xs sm:table-lg">
             {/* head */}
             <thead>
@@ -156,6 +165,7 @@ const AllUsers = () => {
               ))}
             </tbody>
           </table>
+          <Toaster position="top-center" reverseOrder={false} />
         </div>
       ) : (
         <div className="h-screen justify-center flex items-center">

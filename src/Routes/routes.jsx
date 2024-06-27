@@ -23,6 +23,7 @@ import SurveyorRoutes from "./SurveyorRoutes";
 import UpdateSurveys from "../Pages/SurveyorDashboard/UpdateSurveys/UpdateSurveys";
 import UpdateForm from "../Pages/SurveyorDashboard/UpdateSurveys/UpdateForm";
 import SurveyorSurveys from "../Pages/SurveyorDashboard/SurveyorSurveys/SurveyorSurveys";
+import ProUser from "./ProUser";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,9 @@ const router = createBrowserRouter([
         path: "/payment",
         element: (
           <PrivateRoute>
-            <Payment />
+            <ProUser>
+              <Payment />
+            </ProUser>
           </PrivateRoute>
         ),
       },

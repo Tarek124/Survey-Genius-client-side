@@ -2,13 +2,12 @@ import Lottie from "lottie-react";
 import myAnimation from "./Animation - 1715438369048.json";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import useSwal from "../hooks/useSwal";
 import { FaGoogle } from "react-icons/fa";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const { login, googleSignIn } = useAuth();
-  const { swalErr, swalSuccess } = useSwal();
   const axiosPublic = useAxiosPublic();
   const location = useLocation();
   const myLocation = location.state ? location.state : "/";
@@ -18,20 +17,22 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    login(email, password)
-      .then(() => {
-        swalSuccess("Login successfully");
-        //    navigate(myLocation);
+
+    toast.promise(
+      login(email, password).then(() => {
+        navigate(myLocation);
         form.reset();
-      })
-      .catch((err) => {
-        swalErr("password or email is incorrect!");
-        console.log(err);
-      });
+      }),
+      {
+        loading: "loging...",
+        success: <b>loged in!</b>,
+        error: <b>password or email is incorrect!</b>,
+      }
+    );
   };
   const googleLogin = () => {
-    googleSignIn()
-      .then((res) => {
+    toast.promise(
+      googleSignIn().then((res) => {
         console.log(res.user);
         const { email, displayName } = res.user;
         const userData = {
@@ -44,17 +45,22 @@ const Login = () => {
         axiosPublic
           .post("users", userData)
           .then(() => {
-            swalSuccess("Login successfully");
             navigate(myLocation);
           })
           .catch((err) => {
             console.log(err);
           });
-      })
-      .catch((err) => {
-        console.log(err);
-        swalErr("Login Failed");
-      });
+      }),
+      // .catch((err) => {
+      //   console.log(err);
+      //   Notify.failure("something went wrong");
+      // })
+      {
+        loading: "loging...",
+        success: <b>loged in!</b>,
+        error: <b>Could not loged in.</b>,
+      }
+    );
   };
   return (
     <div className="mt-16 p-4 flex justify-center">
@@ -124,6 +130,7 @@ const Login = () => {
           <Lottie animationData={myAnimation} />
         </div>
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };

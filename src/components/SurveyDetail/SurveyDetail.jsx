@@ -18,6 +18,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import toast from "react-hot-toast";
 
 const SurveyDetail = () => {
   const { id } = useParams();
@@ -84,6 +85,9 @@ const SurveyDetail = () => {
 
   const handleSubmitComment = (e) => {
     e.preventDefault();
+    if (userRole !== "pro-user") {
+      return navigate("/payment");
+    }
     const comment = e.target.comment.value;
     if (comment.length === 0) {
       return alert("Please enter a comment");
@@ -165,12 +169,19 @@ const SurveyDetail = () => {
   //delete comment
 
   function handleDelete(id) {
-    axiosSecure.post("/deleteComment", { id }).then((res) => {
-      if (res.data?.deletedCount) {
-        commentsRefetch();
-        setEditComment({ comment: "", id: "" });
+    toast.promise(
+      axiosSecure.post("/deleteComment", { id }).then((res) => {
+        if (res.data?.deletedCount) {
+          commentsRefetch();
+          setEditComment({ comment: "", id: "" });
+        }
+      }),
+      {
+        loading: "deleting...",
+        success: <b>deleted!</b>,
+        error: <b>Could not delete.</b>,
       }
-    });
+    );
   }
   return (
     <div className="h-screen  w-full dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center">
@@ -319,10 +330,7 @@ const SurveyDetail = () => {
                                 placeholder="Write a comment..."
                                 defaultValue={editComment.comment}
                               />
-                              <button
-                                disabled={userRole !== "pro-user"}
-                                className="btn join-item"
-                              >
+                              <button className="btn join-item">
                                 <IoPaperPlaneSharp />
                               </button>
                             </form>

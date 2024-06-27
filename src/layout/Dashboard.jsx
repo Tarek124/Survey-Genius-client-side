@@ -1,9 +1,9 @@
 import { Link, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { LuCrown } from "react-icons/lu";
-import useSwal from "../hooks/useSwal";
-import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
+import { Confirm } from "notiflix";
+import toast, { Toaster } from "react-hot-toast";
 
 const themes = [
   "light",
@@ -25,20 +25,68 @@ const themes = [
 
 const Dashboard = () => {
   const { user, userRole, logout } = useAuth();
-  const { swalSuccess } = useSwal();
   const handleLogout = () => {
-    Swal.fire({
-      title: "Are you sure to logout?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        logout().then(() => swalSuccess("logout success"));
+    Confirm.show(
+      "Are you sure to logout?",
+      "you can't undo it!",
+      "Yes",
+      "No",
+      () => {
+        toast.promise(
+          logout().then(() => {}),
+          {
+            loading: "logouting...",
+            success: <b>Logout!</b>,
+            error: <b>Could not logout.</b>,
+          }
+        );
+      },
+      () => {},
+      {}
+    );
+  };
+
+  // user
+  const userInformation = () => {
+    toast.custom(
+      (t) => (
+        <div
+          className={`${
+            t.visible ? "animate-enter" : "animate-leave"
+          } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+        >
+          <div className="flex-1 w-0 p-4">
+            <div className="flex items-start">
+              <div className="flex-shrink-0 pt-0.5">
+                <img
+                  className="h-10 w-10 rounded-full"
+                  src={user?.photoURL}
+                  alt=""
+                />
+              </div>
+              <div className="ml-3 flex-1">
+                <p className="text-sm font-medium text-gray-900">
+                  {user?.displayName}
+                </p>
+                <p className="mt-1 text-sm text-gray-500">{user?.email}</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex border-l border-gray-200">
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        duration: 2000,
+        
       }
-    });
+    );
   };
 
   //theme
@@ -167,7 +215,7 @@ const Dashboard = () => {
             </li>{" "}
             <li>
               <select
-                className="border border-[#7f7e7f38] "
+                className="border border-[#7f7e7f38]"
                 value={selectedTheme}
                 onChange={handleThemeChange}
               >
@@ -181,11 +229,8 @@ const Dashboard = () => {
                 ))}
               </select>
             </li>
-            <li>
-              <a>{user?.displayName}</a>
-            </li>
             {userRole === "user" ? (
-              <li className="border rounded shadow-inner tracking-widef">
+              <li className="my-2 border-[#7f7e7f38] border shadow-inner tracking-wide rounded-3xl">
                 <Link to="/payment">
                   <LuCrown />
                   Try Pro
@@ -194,6 +239,9 @@ const Dashboard = () => {
             ) : (
               ""
             )}
+            <li onClick={userInformation}>
+              <a>{user?.displayName}</a>
+            </li>
             {user && (
               <li onClick={handleLogout}>
                 <a>Logout</a>
@@ -202,6 +250,7 @@ const Dashboard = () => {
           </ul>
         </div>
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 };

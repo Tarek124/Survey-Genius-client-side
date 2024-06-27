@@ -1,14 +1,14 @@
 import Lottie from "lottie-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import myAnimation from "./Animation - 1715438369048.json";
-import useSwal from "../hooks/useSwal";
 import useAuth from "../hooks/useAuth";
 import { IoMdPhotos } from "react-icons/io";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { Notify } from "notiflix";
+import toast, { Toaster } from "react-hot-toast";
 
 const Registation = () => {
   const { createUser, updateUser, user } = useAuth();
-  const { swalErr, swalSuccess } = useSwal();
   const axiosPublic = useAxiosPublic();
   const location = useLocation();
   const myLocation = location.state ? location.state : "/";
@@ -22,30 +22,34 @@ const Registation = () => {
     const photoURL = form.photoURL.value;
     const email = myEmail.toLowerCase();
     const userData = { email, name, role: "user", user };
-    createUser(email, password)
-      .then((res) => {
-        updateUser(name, photoURL)
-          .then(() => {
-            axiosPublic
-              .post("users", { ...userData, user: res.user })
-              .then(() => {
-                swalSuccess("Registation successfully");
-                navigate(myLocation);
-                form.reset();
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          })
-          .catch((err) => {
-            console.log(err);
-            swalErr("username or photo url is not valid");
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-        swalErr("Registration failed");
-      });
+    toast.promise(
+      createUser(email, password)
+     .then((res) => {
+       updateUser(name, photoURL)
+         .then(() => {
+           axiosPublic
+             .post("users", { ...userData, user: res.user })
+             .then(() => {
+               navigate(myLocation);
+               form.reset();
+             })
+             .catch((err) => {
+               console.log(err);
+             });
+         })
+         .catch((err) => {
+           console.log(err);
+           Notify.failure("username or photo url is not valid");
+         });
+     }),
+     {
+       loading: "loading...",
+       success: <b>Registation successfully!</b>,
+       error: <b>Registration failed</b>,
+     }
+   );
+   
+  
   };
   return (
     <div className="mt-16 p-4 flex justify-center">
@@ -140,6 +144,7 @@ const Registation = () => {
           <Lottie animationData={myAnimation} />
         </div>
       </div>
+      <Toaster position="top-center" reverseOrder={false}/>
     </div>
   );
 };

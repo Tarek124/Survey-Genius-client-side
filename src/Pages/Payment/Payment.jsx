@@ -12,7 +12,7 @@ const Payment = () => {
     return <Navigate to="/" />;
   }
   return (
-    <div className="mt-40 max-w-7xl mx-auto border border-[#7f7e7f38] rounded px-8 pb-10">
+    <div className="mt-28 mb-8 max-w-7xl mx-auto border border-[#7f7e7f38] rounded sm:px-8 pb-10">
       <Elements stripe={stripePromise}>
         <CheckOut />
       </Elements>

@@ -22,7 +22,7 @@ const CreateSurveys = () => {
       ...data,
       deadline: moment(data.deadline).format("MMMM D, YYYY"),
       votes: 0,
-      createdBy: user?.email,
+      createdBy: user?.email || "user",
       options: options.filter((option) => option.option !== ""),
     };
     console.log(surveyData);

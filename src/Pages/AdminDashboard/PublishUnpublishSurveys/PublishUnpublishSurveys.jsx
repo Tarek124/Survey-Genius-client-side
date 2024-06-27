@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAllSurveys from "../../../hooks/useAllSurveys";
-import Swal from "sweetalert2";
+import { Confirm } from "notiflix/build/notiflix-confirm-aio";
+import toast, { Toaster } from "react-hot-toast";
 
 const PublishUnpublishSurveys = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,29 +23,29 @@ const PublishUnpublishSurveys = () => {
     },
   });
   const handleSurveys = (obj) => {
-    Swal.fire({
-      title: `Are you sure to ${obj.condition}`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: `Yes, ${obj.condition}`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.post("/handleSurveys", obj).then((res) => {
-          if (res?.data?.deletedCount) {
-            Swal.fire({
-              title: `${obj.condition}!`,
-              icon: "success",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            refetch();
-            unpublishedRefetch();
+    Confirm.show(
+      `Are you sure to ${obj.condition}`,
+      "you can't undo it!",
+      "Yes",
+      "No",
+      () => {
+        toast.promise(
+          axiosSecure.post("/handleSurveys", obj).then((res) => {
+            if (res?.data?.deletedCount) {
+              refetch();
+              unpublishedRefetch();
+            }
+          }),
+          {
+            loading: `${obj.condition}ing...`,
+            success: <b>{obj.condition}</b>,
+            error: <b>Could not {obj.condition}.</b>,
           }
-        });
-      }
-    });
+        );
+      },
+      () => {},
+      {}
+    );
   };
   return (
     <div className="sm:p-4 p-2">
@@ -133,6 +134,7 @@ const PublishUnpublishSurveys = () => {
                 ))}
               </tbody>
             </table>
+            <Toaster position="top-center" reverseOrder={false} />
           </div>
         ) : (
           <div className="h-screen justify-center flex items-center">
