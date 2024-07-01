@@ -84,7 +84,6 @@ const Dashboard = () => {
       ),
       {
         duration: 2000,
-        
       }
     );
   };
@@ -136,7 +135,7 @@ const Dashboard = () => {
             <h1 className="text-3xl font-semibold font-serif">Survey Genius</h1>
           </div>
           <div>
-            <Outlet />
+              <Outlet />
           </div>
         </div>
         <div className="drawer-side">
