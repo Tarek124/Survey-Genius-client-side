@@ -12,11 +12,13 @@ html {
 }
 .myText {
   -webkit-text-stroke: white 1px;
-  font-size: 150px;
+  color: transparent; /* Text color */
+}
+.myText3 {
+  -webkit-text-stroke: white 1px;
   color: transparent; /* Text color */
 }
 .myText2 {
   -webkit-text-stroke: #4ade80 2px;
-  font-size: 150px;
   color: transparent; /* Text color */
 }

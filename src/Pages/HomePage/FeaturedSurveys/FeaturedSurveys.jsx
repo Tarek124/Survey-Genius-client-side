@@ -20,7 +20,7 @@ const FeaturedSurveys = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:p-4">
             {data?.map((item) => (
               <Link key={item._id} to={`/details/${item._id}`}>
-                <div className="card md:w-96 bg-base-100 shadow-xl border border-[#7f7e7f38]">
+                <div className="card md:w-96 bg-base-100 shadow hover:shadow-lg transition-shadow border border-[#7f7e7f38]">
                   <div className="card-body">
                     <h2 className="card-title">{item.title}</h2>
                     <p>{item.description}</p>

@@ -23,7 +23,7 @@ const LatestSurveys = () => {
                 to={`/details/${item._id}`}
                 data-aos="zoom-in"
               >
-                <div className="card md:w-96 bg-base-100 shadow-xl border-[#7f7e7f38] border">
+                <div className="card md:w-96 bg-base-100 shadow hover:shadow-lg transition-shadow border-[#7f7e7f38] border">
                   <div className="card-body">
                     <h2 className="card-title">{item.title}</h2>
                     <p>{item.description}</p>

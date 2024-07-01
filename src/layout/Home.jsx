@@ -39,7 +39,7 @@ const Home = () => {
     return () => ctx.revert();
   }, []);
   return (
-    <div className="relative" ref={comp}>
+    <div className="relative " ref={comp}>
       <div
         id="intro-slider"
         className="h-screen overflow-hidden p-4 sm:p-10 bg-gradient-to-r from-[#020617] to-[#14BFDB]  text-white absolute top-0 left-0 z-40 w-full flex flex-col"
@@ -52,7 +52,7 @@ const Home = () => {
         </h1>
         <span
           id="title-2"
-          className="xl:text-[180px] font-bold lg:text-9xl text-5xl myText2"
+          className="xl:text-[180px] font-bold lg:text-9xl text-8xl myText2"
         >
           Survey Genius
         </span>

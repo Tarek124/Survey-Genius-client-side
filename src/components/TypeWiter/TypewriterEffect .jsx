@@ -106,7 +106,7 @@ export const TypewriterEffectSmooth = ({ words, className, cursorClassName }) =>
               {word.text.map((char, index) => (
                 <span
                   key={`char-${index}`}
-                  className={cn(`dark:text-white text-black `, word.className)}
+                  className={cn(` `, word.className)}
                 >
                   {char}
                 </span>

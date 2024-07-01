@@ -1,10 +1,25 @@
 import { Link } from "react-router-dom";
-import { LampContainer } from "./LampDemo";
 import { motion } from "framer-motion";
+import { FlipWords } from "../../../components/FlipWords/FlipWords";
 
 const HeroSection = () => {
+  const words = [
+    "Engage",
+    "Discover",
+    "Analyze",
+    "Succeed",
+    "Insightful",
+    "Innovative",
+    "Capture",
+    "Feedback",
+    "Analyze",
+    "Reliable",
+    "Decide",
+    "Customizable",
+  ];
+
   return (
-    <LampContainer>
+    <div className="h-screen items-center justify-center flex">
       <motion.h1
         initial={{ opacity: 0.5, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -13,13 +28,13 @@ const HeroSection = () => {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+        className="mt-8 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight md:text-7xl"
       >
         <Link to="/surveys">
-          Survey Genius <br /> Explore
+          <FlipWords words={words} /> With Survey Genius
         </Link>
       </motion.h1>
-    </LampContainer>
+    </div>
   );
 };
 
