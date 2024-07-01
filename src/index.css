@@ -15,7 +15,7 @@ html {
   color: transparent; /* Text color */
 }
 .myText3 {
-  -webkit-text-stroke: white 1px;
+  -webkit-text-stroke: rgb(15, 79, 244) 1px;
   color: transparent; /* Text color */
 }
 .myText2 {
