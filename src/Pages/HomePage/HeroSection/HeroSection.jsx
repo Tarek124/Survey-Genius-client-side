@@ -28,10 +28,10 @@ const HeroSection = () => {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-8 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight md:text-7xl"
+        className="mt-8 py-4 bg-clip-text text-center text-5xl font-medium tracking-tight md:text-7xl"
       >
         <Link to="/surveys">
-          <FlipWords words={words} /> With Survey Genius
+          <FlipWords words={words} /> <br /> <span>With Survey Genius</span>
         </Link>
       </motion.h1>
     </div>
