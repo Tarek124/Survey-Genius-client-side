@@ -1,7 +1,7 @@
 
 import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { useEffect } from "react";
-import { cn } from "../../../../utils/cn";
+import { cn } from "../../../utils/cn";
 
 export const TypewriterEffect = ({ words, className, cursorClassName }) => {
   // split text inside of words into array of characters
