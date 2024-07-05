@@ -24,6 +24,9 @@ import UpdateSurveys from "../Pages/SurveyorDashboard/UpdateSurveys/UpdateSurvey
 import UpdateForm from "../Pages/SurveyorDashboard/UpdateSurveys/UpdateForm";
 import SurveyorSurveys from "../Pages/SurveyorDashboard/SurveyorSurveys/SurveyorSurveys";
 import ProUser from "./ProUser";
+import TermsAndCondition from "../Pages/TermsAndCondition/TermsAndCondition";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +52,9 @@ const router = createBrowserRouter([
         ),
       },
       { path: "/surveys", element: <Surveys /> },
+      { path: "/termsAndConditions", element: <TermsAndCondition /> },
+      { path: "/aboutus", element: <AboutUs /> },
+      { path: "/contactus", element: <ContactUs /> },
       {
         path: "/payment",
         element: (
