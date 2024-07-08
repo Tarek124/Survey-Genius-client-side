@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
-import SmoothScroll from "../components/SmoothScroll/SmoothScroll";
 import gsap from "gsap";
 import { useLayoutEffect, useRef } from "react";
 
@@ -72,9 +71,7 @@ const Home = () => {
       <div>
         <div id="welcome">
           <Navbar />
-          <SmoothScroll>
             <Outlet />
-          </SmoothScroll>
         </div>
       </div>
     </div>
