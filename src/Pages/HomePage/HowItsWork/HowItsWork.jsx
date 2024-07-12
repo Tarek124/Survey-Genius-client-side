@@ -1,4 +1,5 @@
 import { InfiniteMovingCards } from "./InfiniteMovingCards ";
+import image from "../../../../public/icons/user-guide.png";
 
 const howItWorksSteps = [
   {
@@ -26,7 +27,10 @@ const howItWorksSteps = [
 const HowItsWork = () => {
   return (
     <div className="h-[40rem] mt-6 rounded-md flex flex-col  items-center justify-center relative overflow-hidden">
-      <h1 className="mb-6 text-4xl font-semibold">How its work</h1>
+      <div className="flex justify-center items-center my-4">
+        <img className="w-16 md:w-20" src={image} alt="" />
+        <h1 className="text-3xl md:text-4xl font-semibold">How its work</h1>
+      </div>
       <InfiniteMovingCards
         items={howItWorksSteps}
         direction="right"

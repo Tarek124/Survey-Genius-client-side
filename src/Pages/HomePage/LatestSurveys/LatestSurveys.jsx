@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
+import image from "../../../../public/icons/new.png";
 
 const LatestSurveys = () => {
   const axiosPublic = useAxiosPublic();
@@ -14,7 +15,10 @@ const LatestSurveys = () => {
   return (
     <div>
       <div className="max-w-7xl mx-auto sm:py-20 sm:border sm:border-[#7f7e7f38] rounded sm:my-10 px-7 sm:px-10">
-        <h1 className="my-6 mx-4 sm:text-4xl font-semibold">Latest Surveys</h1>
+        <div className="flex justify-center items-center my-4 gap-1">
+          <img className="w-16 md:w-20" src={image} alt="" />
+          <h1 className="text-3xl md:text-4xl font-semibold">Latest Surveys</h1>
+        </div>
         {!isLoading ? (
           <div className="sm:p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {data?.map((item) => (
