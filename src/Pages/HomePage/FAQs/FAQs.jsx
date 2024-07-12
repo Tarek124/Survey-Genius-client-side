@@ -31,7 +31,7 @@ const faqs = [
 const FAQs = () => {
   const { user } = useAuth();
   return (
-    <div className="sm:mt-12 mx-auto max-w-7xl sm:border sm:border-[#7f7e7f38] px-4 sm:px-8 rounded mb-20">
+    <div className="sm:mt-12 mx-auto max-w-7xl shadow sm:border sm:border-[#7f7e7f38] px-4 sm:px-8 rounded mb-20">
       <div className="sm:px-8 sm:py-20">
         <div className="max-w-7xl mx-auto lg:flex gap-4">
           <div className="lg:w-1/2 mb-8 lg:pr-8">
