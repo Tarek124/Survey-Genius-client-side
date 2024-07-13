@@ -53,8 +53,8 @@ const router = createBrowserRouter([
       },
       { path: "/surveys", element: <Surveys /> },
       { path: "/termsAndConditions", element: <TermsAndCondition /> },
-      { path: "/aboutus", element: <AboutUs /> },
-      { path: "/contactus", element: <ContactUs /> },
+      { path: "/about-us", element: <AboutUs /> },
+      { path: "/contact-us", element: <ContactUs /> },
       {
         path: "/payment",
         element: (

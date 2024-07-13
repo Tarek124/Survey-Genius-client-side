@@ -105,10 +105,10 @@ const Navbar = () => {
         <Link to="/surveys">Surveys</Link>
       </li>
       <li className="tracking-wide">
-        <Link to="/aboutus">About Us</Link>
+        <Link to="/about-us">About Us</Link>
       </li>
       <li className="tracking-wide">
-        <Link to="/contactus">Contact Us</Link>
+        <Link to="/contact-us">Contact Us</Link>
       </li>
       <li className="tracking-wide">
         <Link to="/termsAndconditions">Terms And Conditions</Link>
@@ -176,7 +176,7 @@ const Navbar = () => {
         </div>
         <Link
           to="/"
-          className="sm:text-xl text-sm xl:text-3xl sm:p-2 font-semibold font-serif"
+          className="sm:p-2 text-xl font-semibold font-serif"
         >
           Survey Genius
         </Link>
